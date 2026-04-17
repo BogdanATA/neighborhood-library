@@ -41,11 +41,11 @@ public class Book {
         this.title = title;
     }
 
-    public boolean isCheckOut() {
+    public boolean isCheckedOut() {
         return isCheckedOut;
     }
 
-    public void setCheckOut(boolean checkOut) {
+    public void setCheckedOut(boolean checkOut) {
         isCheckedOut = checkOut;
     }
 
