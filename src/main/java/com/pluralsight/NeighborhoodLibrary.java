@@ -42,7 +42,7 @@ public class NeighborhoodLibrary {
                     showAvailableBooks(scanner);
                     break;
                 case 2:
-                    showCheckedOut();
+                    showCheckedOut(scanner);
                     break;
                 case 3:
                     System.out.println("Goodbye!");
@@ -95,11 +95,50 @@ public class NeighborhoodLibrary {
     }
 
     //show checked out books
-    public static void showCheckedOut(){
+    public static void showCheckedOut(Scanner scanner){
         //show book if CheckedOut = true
         for (int i = 0; i < numBooks; i++) {
             if(books[i].isCheckedOut())
                 System.out.println(books[i]);
+        }
+        boolean isDone = false;
+        while (!isDone) {
+            System.out.println("Would you like to check in a book?");
+            System.out.println("(C) check in a book");
+            System.out.println("(X) go back to homescreen");
+            String command = scanner.nextLine().trim().toUpperCase();
+
+            switch (command){
+                case "C":
+                    //c to check in a book
+                    checkInBook(scanner);
+                    break;
+                case "X":
+                    //x go back to homescreen
+                    System.out.println("GoodBye! ");
+                    isDone = true;
+                    break;
+                default:
+                    System.out.println("Invalid command");
+                    break;
+            }
+        }
+    }
+
+    public static void checkInBook(Scanner scanner){
+        System.out.println("What is the ID of the book you want to check in?");
+        int bookId = scanner.nextInt();
+        scanner.nextLine();
+
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].getId() == bookId) {
+                if (books[i].isCheckedOut()) { //can only check in book if it is checked out
+                    books[i].checkIn(); //update checkedOutTo name to "" and update isCheckedOut to false
+                    System.out.println("Thank you, this book was successfully checked in.");
+                } else {
+                    System.out.println("Book is either already checked in or the ID does not match a book in our system.");
+                }
+            }
         }
     }
 
@@ -109,12 +148,12 @@ public class NeighborhoodLibrary {
         String name = scanner.nextLine();
 
         System.out.println("what is the book ID: ");
-        int bookID = scanner.nextInt();
+        int bookId = scanner.nextInt();
         scanner.nextLine();
 
         //check if ID entered is a real ID, if it is check out that book
         for (int i = 0; i < numBooks; i++) {
-            if (books[i].getId() == bookID){
+            if (books[i].getId() == bookId){
                 if (!books[i].isCheckedOut()) { // cannot check out book if isCheckedOut is already true
                     books[i].checkOut(name); //update checkedOutTo to the name entered and update isCheckedOut to true
                     System.out.println("Thank you " + name + ", book is successfully checked out.");
