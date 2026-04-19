@@ -11,6 +11,7 @@ public class NeighborhoodLibrary {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        //list of initialized books
         books[0] = new Book(1, "9781402894626", "The Potato Harvest", false, "");
         books[1] = new Book(2, "9780545010221", "Beneath the Potato Fields", false, "");
         books[2] = new Book(3, "9781861978769", "A History of the Humble Potato", false, "");
@@ -18,9 +19,7 @@ public class NeighborhoodLibrary {
         books[4] = new Book(5, "9781250306983", "Secrets of the Golden Spud", false, "");
         books[5] = new Book(6, "9780316769480", "The Potato Kingdom", false, "");
         books[6] = new Book(7, "9781984876542", "From Soil to Supper: The Potato Story", false, "");
-
-
-        System.out.println(books[0]);
+        //end of list
 
         //run loop until user exits
         boolean isDone = false;
@@ -53,15 +52,15 @@ public class NeighborhoodLibrary {
                     break;
             }
         }
-
-
     }
-    //list all books in the library
+    //list all currently available books in the library
     public static void showAvailableBooks(Scanner scanner){
         System.out.println("Book Inventory:");
         //shows all the available books
         for (int i = 0; i < numBooks; i++) {
-            System.out.println(books[i]);
+            if (!books[i].isCheckedOut()) { //if book isnt checked out print the book
+                System.out.println(books[i]);
+            }
         }
         //ask if they want to check out a book
         boolean isDone = false;
@@ -94,7 +93,7 @@ public class NeighborhoodLibrary {
 
     }
 
-    //show checked out books
+    //show checked out books / and ask if they want to check in a book
     public static void showCheckedOut(Scanner scanner){
         //show book if CheckedOut = true
         for (int i = 0; i < numBooks; i++) {
@@ -125,7 +124,9 @@ public class NeighborhoodLibrary {
         }
     }
 
+    //called by showCheckedOut to check in a book
     public static void checkInBook(Scanner scanner){
+        //get ID of book that user wants to check in
         System.out.println("What is the ID of the book you want to check in?");
         int bookId = scanner.nextInt();
         scanner.nextLine();
@@ -142,6 +143,7 @@ public class NeighborhoodLibrary {
         }
     }
 
+    //called by showAvailableBooks to check out a book
     public static void checkOutBook(Scanner scanner){
         //enter your name and id number of book you are checking out
         System.out.println("What is your name: ");
@@ -165,4 +167,6 @@ public class NeighborhoodLibrary {
         }
 
     }
+
+
 }
