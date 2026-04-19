@@ -69,12 +69,12 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", isbn='" + isbn + '\'' +
-                ", title='" + title + '\'' +
-                ", isCheckedOut=" + isCheckedOut +
-                ", checkedOutTo='" + checkedOutTo + '\'' +
+        return "Book || " +
+                "ID = " + id +
+                " || ISBN = '" + isbn + '\'' +
+                " || TITLE = '" + title + '\'' +
+                " || CheckedOut = " + isCheckedOut +
+                " || CheckedOutTo = '" + checkedOutTo + '\'' +
                 '}';
     }
 }
