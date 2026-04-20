@@ -56,6 +56,7 @@ public class NeighborhoodLibrary {
     //list all currently available books in the library
     public static void showAvailableBooks(Scanner scanner){
         System.out.println("Book Inventory:");
+        System.out.println("---------------");
         //shows all the available books
         for (int i = 0; i < numBooks; i++) {
             if (!books[i].isCheckedOut()) { //if book isnt checked out print the book
@@ -65,7 +66,7 @@ public class NeighborhoodLibrary {
         //ask if they want to check out a book
         boolean isDone = false;
         while (!isDone) { // will run until isDone is set to true
-            System.out.println("Do you want to check out a book");
+            System.out.println("\nDo you want to check out a book");
             System.out.println("1) to check out a book");
             System.out.println("2) to exit");
 
@@ -95,14 +96,17 @@ public class NeighborhoodLibrary {
 
     //show checked out books / and ask if they want to check in a book
     public static void showCheckedOut(Scanner scanner){
+        System.out.println("List of Checked Out Books:");
+        System.out.println("--------------------------");
         //show book if CheckedOut = true
         for (int i = 0; i < numBooks; i++) {
-            if(books[i].isCheckedOut())
+            if(books[i].isCheckedOut()) {
                 System.out.println(books[i]);
+            }
         }
         boolean isDone = false;
         while (!isDone) {
-            System.out.println("Would you like to check in a book?");
+            System.out.println("\nWould you like to check in a book?");
             System.out.println("(C) check in a book");
             System.out.println("(X) go back to homescreen");
             String command = scanner.nextLine().trim().toUpperCase();
@@ -139,6 +143,7 @@ public class NeighborhoodLibrary {
                 } else {
                     System.out.println("Book is either already checked in or the ID does not match a book in our system.");
                 }
+                return; //bring user back to screen asking if he wants to check in book
             }
         }
     }
