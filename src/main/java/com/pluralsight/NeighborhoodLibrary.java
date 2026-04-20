@@ -96,16 +96,17 @@ public class NeighborhoodLibrary {
 
     //show checked out books / and ask if they want to check in a book
     public static void showCheckedOut(Scanner scanner){
-        System.out.println("List of Checked Out Books:");
-        System.out.println("--------------------------");
-        //show book if CheckedOut = true
-        for (int i = 0; i < numBooks; i++) {
-            if(books[i].isCheckedOut()) {
-                System.out.println(books[i]);
-            }
-        }
+
         boolean isDone = false;
         while (!isDone) {
+            System.out.println("\nList of Checked Out Books:");
+            System.out.println("--------------------------");
+            //show book if CheckedOut = true
+            for (int i = 0; i < numBooks; i++) {
+                if(books[i].isCheckedOut()) {
+                    System.out.println(books[i]);
+                }
+            }
             System.out.println("\nWould you like to check in a book?");
             System.out.println("(C) check in a book");
             System.out.println("(X) go back to homescreen");
@@ -141,7 +142,7 @@ public class NeighborhoodLibrary {
                     books[i].checkIn(); //update checkedOutTo name to "" and update isCheckedOut to false
                     System.out.println("Thank you, this book was successfully checked in.");
                 } else {
-                    System.out.println("Book is either already checked in or the ID does not match a book in our system.");
+                    System.out.println("Book is either already checked in or the ID does not match a book in our system.\n");
                 }
                 return; //bring user back to screen asking if he wants to check in book
             }
