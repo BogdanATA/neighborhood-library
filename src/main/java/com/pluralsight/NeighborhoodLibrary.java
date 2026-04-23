@@ -48,14 +48,14 @@ public class NeighborhoodLibrary {
                     isDone = true;
                     break;
                 default:
-                    System.out.println("Invalid command");
+                    System.out.println("Invalid command. Please enter 1, 2 or 3.");
                     break;
             }
         }
     }
     //list all currently available books in the library
     public static void showAvailableBooks(Scanner scanner){
-        System.out.println("Book Inventory:");
+        System.out.println("\nBook Inventory:");
         System.out.println("---------------");
         //shows all the available books
         for (int i = 0; i < numBooks; i++) {
@@ -67,8 +67,8 @@ public class NeighborhoodLibrary {
         boolean isDone = false;
         while (!isDone) { // will run until isDone is set to true
             System.out.println("\nDo you want to check out a book");
-            System.out.println("1) to check out a book");
-            System.out.println("2) to exit");
+            System.out.println("1) Check out a book");
+            System.out.println("2) Exit");
 
             int command = scanner.nextInt();
             scanner.nextLine();
@@ -90,6 +90,38 @@ public class NeighborhoodLibrary {
 
             }
 
+        }
+
+    }
+
+    //called by showAvailableBooks to check out a book
+    public static void checkOutBook(Scanner scanner){
+        //enter your name and id number of book you are checking out
+        System.out.println("\nWhat is your name: ");
+        String name = scanner.nextLine();
+
+        int bookId = 0;
+        try {
+            System.out.println("what is the book ID: ");
+            bookId = scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a number");
+            scanner.nextLine();
+
+        }
+
+        //check if ID entered is a real ID, if it is check out that book
+        for (int i = 0; i < numBooks; i++) {
+            if (books[i].getId() == bookId){
+                if (!books[i].isCheckedOut()) { // cannot check out book if isCheckedOut is already true
+                    books[i].checkOut(name); //update checkedOutTo to the name entered and update isCheckedOut to true
+                    System.out.println("Thank you " + name + ", book is successfully checked out.");
+                } else {
+                    System.out.println("That book is unavailable.");
+                }
+
+            }
         }
 
     }
@@ -119,7 +151,7 @@ public class NeighborhoodLibrary {
                     break;
                 case "X":
                     //x go back to homescreen
-                    System.out.println("GoodBye! ");
+                    System.out.println("Goodbye! ");
                     isDone = true;
                     break;
                 default:
@@ -132,9 +164,15 @@ public class NeighborhoodLibrary {
     //called by showCheckedOut to check in a book
     public static void checkInBook(Scanner scanner){
         //get ID of book that user wants to check in
-        System.out.println("What is the ID of the book you want to check in?");
-        int bookId = scanner.nextInt();
-        scanner.nextLine();
+        int bookId = 0;
+        try {
+            System.out.println("What is the ID of the book you want to check in?");
+            bookId = scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+            System.out.println("Invalid input. Please enter a number");
+            scanner.nextLine();
+        }
 
         for (int i = 0; i < numBooks; i++) {
             if (books[i].getId() == bookId) {
@@ -148,31 +186,5 @@ public class NeighborhoodLibrary {
             }
         }
     }
-
-    //called by showAvailableBooks to check out a book
-    public static void checkOutBook(Scanner scanner){
-        //enter your name and id number of book you are checking out
-        System.out.println("What is your name: ");
-        String name = scanner.nextLine();
-
-        System.out.println("what is the book ID: ");
-        int bookId = scanner.nextInt();
-        scanner.nextLine();
-
-        //check if ID entered is a real ID, if it is check out that book
-        for (int i = 0; i < numBooks; i++) {
-            if (books[i].getId() == bookId){
-                if (!books[i].isCheckedOut()) { // cannot check out book if isCheckedOut is already true
-                    books[i].checkOut(name); //update checkedOutTo to the name entered and update isCheckedOut to true
-                    System.out.println("Thank you " + name + ", book is successfully checked out.");
-                } else {
-                    System.out.println("That book is unavailable.");
-                }
-
-            }
-        }
-
-    }
-
 
 }
