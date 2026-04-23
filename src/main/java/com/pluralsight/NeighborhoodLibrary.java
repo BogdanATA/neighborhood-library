@@ -32,8 +32,13 @@ public class NeighborhoodLibrary {
             System.out.println("3) Exit");
 
             //read user input on home screen
-            int command = scanner.nextInt();
-            scanner.nextLine();
+            int command = 0;
+            try {
+                command = scanner.nextInt();
+                scanner.nextLine();
+            } catch (Exception e) {
+                scanner.nextLine();
+            }
 
             //switch statement to open menu that user selected
             switch(command) {
